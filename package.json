@@ -1,0 +1,18 @@
+{
+  "name": "smartchef",
+  "version": "1.0.0",
+  "description": "Pametni kuhar - parser za Lidl in Mercator",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "scrape": "node saveProducts.js",
+    "serve": "node index.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "puppeteer": "18.1.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  }
+}

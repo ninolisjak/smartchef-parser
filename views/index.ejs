@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8">
+  <title>Pametni kuhar – Lidl & Mercator</title>
+  <link rel="stylesheet" href="/Css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Pametni kuhar – Rezultati iskanja</h1>
+
+    <% if (!products || !products.length) { %>
+      <p>Ni rezultatov. Zaženi: <code>node saveProducts.js mleko 3.5%</code></p>
+    <% } %>
+
+    <div class="grid">
+      <% products.forEach(p => { %>
+        <div class="card">
+          <div class="img-wrap">
+            <img src="<%= p.image || 'https://via.placeholder.com/240x200?text=Ni+slike' %>" alt="<%= p.name %>">
+          </div>
+          <h3><%= p.name %></h3>
+          <p><b>Trgovina:</b> <%= p.store %></p>
+          <p><b>Cena:</b> <%= p.price ? p.price.toFixed(2) : '—' %> €</p>
+          <p><b>Količina:</b> <%= p.packageSize?.value ? (p.packageSize.value + ' ' + p.packageSize.unit) : '—' %></p>
+          <p><b>€/enoto:</b> <%= p.pricePerUnit?.value ? (p.pricePerUnit.value.toFixed(2) + ' €/ ' + p.pricePerUnit.unit) : '—' %></p>
+          <% if (p.url) { %>
+            <p><a href="<%= p.url %>" target="_blank">Odpri izdelek</a></p>
+          <% } %>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+</html>

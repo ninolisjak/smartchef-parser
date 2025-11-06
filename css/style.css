@@ -1,0 +1,35 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f7f9;
+  margin: 0;
+}
+.container {
+  max-width: 1100px;
+  margin: 32px auto;
+  padding: 0 16px;
+}
+h1 { text-align: center; margin-bottom: 24px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .06);
+  padding: 12px;
+}
+.img-wrap {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  border-radius: 10px;
+}
+img { max-width: 100%; max-height: 100%; object-fit: contain; }
+h3 { font-size: 16px; margin: 8px 0; }
+p { margin: 4px 0; }
+a { color: #0b69c7; text-decoration: none; }
+a:hover { text-decoration: underline; }
