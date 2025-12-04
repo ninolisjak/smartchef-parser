@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package smartchef;
+
+// Message za posamezen proizvod
+message Product {
+    string id = 1;
+    string name = 2;
+    string category = 3;
+    double price = 4;
+    string store = 5;
+    int32 quantity = 6;
+}
+
+// Message za seznam proizvodov
+message ProductList {
+    repeated Product products = 1;
+    int32 total_count = 2;
+    string timestamp = 3;
+}
+
+// Message za zahtevek - iskalnega niza
+message SearchRequest {
+    string query = 1;
+    string category_filter = 2;
+    int32 max_results = 3;
+}
+
+// Message za zahtevek - filtriranje po kategoriji
+message CategoryRequest {
+    string category = 1;
+    double min_price = 2;
+    double max_price = 3;
+}
+
+// Message za zahtevek - pridobivanje statističnih podatkov
+message StatsRequest {
+    string product_id = 1;
+}
+
+// Message za statistiko производа
+message ProductStats {
+    string product_id = 1;
+    string product_name = 2;
+    double average_price = 3;
+    int32 availability_count = 4;
+    string lowest_price_store = 5;
+    string highest_price_store = 6;
+}
+
+// Message za streaming podatkov
+message ProductUpdate {
+    string product_id = 1;
+    string product_name = 2;
+    double new_price = 3;
+    string store = 4;
+    string update_time = 5;
+}
+
+// Message za prazno zahtevo
+message Empty {
+}
+
+// Service z 4+ RPC klici
+service ProductService {
+    // 1. Preprost RPC - iskanje proizvodov po ključni besedi
+    rpc SearchProducts (SearchRequest) returns (ProductList) {}
+    
+    // 2. Preprost RPC - pridobivanje proizvodov po kategoriji
+    rpc GetProductsByCategory (CategoryRequest) returns (ProductList) {}
+    
+    // 3. Preprost RPC - pridobivanje statistike za proizvod
+    rpc GetProductStats (StatsRequest) returns (ProductStats) {}
+    
+    // 4. Preprost RPC - pridobivanje vseh proizvodov
+    rpc GetAllProducts (Empty) returns (ProductList) {}
+    
+    // 5. Server-side streaming RPC - spremljanje posodobitev cen v realnem času
+    rpc WatchPriceUpdates (CategoryRequest) returns (stream ProductUpdate) {}
+}
